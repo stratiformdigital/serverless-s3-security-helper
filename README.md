@@ -1,8 +1,11 @@
 # Serverless S3 Bucket Helper
 
-This plugin set settings on all S3 buckets. These are settings we want everywhere.
+This plugin sets settings on all S3 buckets. These are settings we generally want everywhere.
 
-Currently, it enables versioning.
+Currently,
+
+- versioning is enabled for all buckets, regardless of configuration... non-negotiable
+- public access is blocked via 'PublicAccessBlockConfiguration' by default.
 
 ## Usage
 
@@ -20,5 +23,5 @@ plugins:
 
 This plugin has two hooks:
 
-- package:createDeploymentArtifacts: This hook sets versioning on the sls deployment bucket.
-- package:compileEvents: This hook sets versioning on all other buckets.
+- package:createDeploymentArtifacts: This ensures the deployment bucket is configured correctly.
+- package:compileEvents: This hook ensures all buckets built by the service are configured correctly.
