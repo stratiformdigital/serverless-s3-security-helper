@@ -6,9 +6,6 @@ class ServerlessPlugin {
     this.options = options;
 
     this.hooks = {
-      // This will ensure the serverless deployment bucket is configured correctly.
-      "aws:deploy:deploy:createStack": this.configureBuckets.bind(this),
-
       // This will configure all S3 buckets according to this plugin.
       "before:deploy:deploy": this.configureBuckets.bind(this),
     };
@@ -42,18 +39,21 @@ class ServerlessPlugin {
 }
 
 function setPropertyForTypes(types, property, value, overrideExistingValue) {
-  const template =
-    this.serverless.service.provider.compiledCloudFormationTemplate;
-  Object.keys(template.Resources).forEach(function (key) {
-    if (types.includes(template.Resources[key]["Type"])) {
-      // Set the target property to the target value... if it's not already set OR we want to override any existing value.
-      if (
-        !(property in template.Resources[key]["Properties"]) ||
-        overrideExistingValue
-      ) {
-        template.Resources[key]["Properties"][property] = value;
+  [
+    this.serverless.service.provider.compiledCloudFormationTemplate,
+    this.serverless.service.provider.coreCloudFormationTemplate,
+  ].forEach(function (template) {
+    Object.keys(template.Resources).forEach(function (key) {
+      if (types.includes(template.Resources[key]["Type"])) {
+        // Set the target property to the target value... if it's not already set OR we want to override any existing value.
+        if (
+          !(property in template.Resources[key]["Properties"]) ||
+          overrideExistingValue
+        ) {
+          template.Resources[key]["Properties"][property] = value;
+        }
       }
-    }
+    });
   });
 }
 

@@ -21,7 +21,4 @@ plugins:
 
 ## Background
 
-This plugin has two hooks:
-
-- package:createDeploymentArtifacts: This ensures the deployment bucket is configured correctly.
-- package:compileEvents: This hook ensures all buckets built by the service are configured correctly.
+This plugin hooks into the serverless lifecycle at "before:deploy:deploy". There, it looks for S3 buckets and potentially modifies each. Currently, versioning is enabled for all buckets and public access is blocked by default.
