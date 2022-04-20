@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.0.0...v2.1.0) (2022-04-20)
+
+
+### Features
+
+* **publish fix:**  Update to fix publishing behavior ([0f06613](https://github.com/mdial89f/serverless-s3-security-helper/commit/0f06613b8f1dd02a5bd640cdce318c44cbd587b3))
+
 # [2.0.0](https://github.com/mdial89f/serverless-s3-security-helper/compare/v1.1.0...v2.0.0) (2022-02-11)
 
 
