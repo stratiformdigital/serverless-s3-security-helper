@@ -1,6 +1,6 @@
 {
   "name": "@mdial89f/serverless-s3-security-helper",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Serverless plugin to set security related settings on s3 buckets.",
   "main": "index.js",
   "scripts": {

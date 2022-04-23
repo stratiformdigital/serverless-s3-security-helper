@@ -1,3 +1,11 @@
+## [2.2.2](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.2.1...v2.2.2) (2022-04-23)
+
+
+### Bug Fixes
+
+* **metadata:** fix metadata ([5fbb28b](https://github.com/mdial89f/serverless-s3-security-helper/commit/5fbb28ba8c4573344ea4016f91755ad2cf7b8bc7))
+* **metadata:** fix metadata ([ccebe8d](https://github.com/mdial89f/serverless-s3-security-helper/commit/ccebe8d5ad1c3e6780a9a1e05ae2faddfb425743))
+
 ## [2.2.1](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.2.0...v2.2.1) (2022-04-23)
 
 
