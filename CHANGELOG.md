@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.1.0...v2.2.0) (2022-04-23)
+
+
+### Features
+
+* **scope:** publish as scoped package ([2238e24](https://github.com/mdial89f/serverless-s3-security-helper/commit/2238e244c0278201f46539b37e709cc7134395f7))
+
 # [2.1.0](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.0.0...v2.1.0) (2022-04-20)
 
 
