@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.2.0...v2.2.1) (2022-04-23)
+
+
+### Bug Fixes
+
+* **lock:** regen lock ([bf52879](https://github.com/mdial89f/serverless-s3-security-helper/commit/bf5287970e11d686be4da5f51b147009f812045b))
+
 # [2.2.0](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.1.0...v2.2.0) (2022-04-23)
 
 
