@@ -1,5 +1,5 @@
 {
-  "name": "@mdial89f/serverless-s3-security-helper",
+  "name": "@theclouddeck/serverless-s3-security-helper",
   "version": "2.2.2",
   "description": "Serverless plugin to set security related settings on s3 buckets.",
   "main": "index.js",
@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mdial89f/serverless-s3-security-helper"
+    "url": "https://github.com/theclouddeck/serverless-s3-security-helper"
   },
   "license": "MIT",
   "author": {
