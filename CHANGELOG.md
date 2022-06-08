@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/theclouddeck/serverless-s3-security-helper/compare/v2.2.2...v2.3.0) (2022-06-08)
+
+
+### Features
+
+* **move org:** move to theclouddeck ([759ba48](https://github.com/theclouddeck/serverless-s3-security-helper/commit/759ba481b4a4647463e3a907a132acd791892bc2))
+
 ## [2.2.2](https://github.com/mdial89f/serverless-s3-security-helper/compare/v2.2.1...v2.2.2) (2022-04-23)
 
 
