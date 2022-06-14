@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/theclouddeck/serverless-s3-security-helper/compare/v2.3.0...v3.0.0) (2022-06-14)
+
+
+### Features
+
+* **sls v3:**  Update peer dependency specifying v3 ([9e8f0be](https://github.com/theclouddeck/serverless-s3-security-helper/commit/9e8f0be4145a3f17667e39a84eece9cd14b1e0ae))
+
+
+### BREAKING CHANGES
+
+* **sls v3:** specifying a sls v3 peer dep
+
 # [2.3.0](https://github.com/theclouddeck/serverless-s3-security-helper/compare/v2.2.2...v2.3.0) (2022-06-08)
 
 

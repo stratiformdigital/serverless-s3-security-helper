@@ -1,6 +1,6 @@
 {
   "name": "@theclouddeck/serverless-s3-security-helper",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "Serverless plugin to set security related settings on s3 buckets.",
   "main": "index.js",
   "scripts": {
