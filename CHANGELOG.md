@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.0.0...v3.1.0) (2022-06-23)
+
+
+### Features
+
+* **migration:** migrate orgs ([c9eccf7](https://github.com/stratiformdigital/serverless-s3-security-helper/commit/c9eccf78fe26836e8162580dc429c691ffd5dcc7))
+
 # [3.0.0](https://github.com/theclouddeck/serverless-s3-security-helper/compare/v2.3.0...v3.0.0) (2022-06-14)
 
 
