@@ -1,13 +1,13 @@
 <h1 align="center" style="border-bottom: none;"> serverless-s3-security-helper</h1>
 <h3 align="center">Sets security related settings on s3 buckets.</h3>
 <p align="center">
-  <a href="https://github.com/theclouddeck/serverless-s3-security-helper/releases/latest">
-    <img alt="latest release" src="https://img.shields.io/github/release/theclouddeck/serverless-s3-security-helper.svg">
+  <a href="https://github.com/stratiformdigital/serverless-s3-security-helper/releases/latest">
+    <img alt="latest release" src="https://img.shields.io/github/release/stratiformdigital/serverless-s3-security-helper.svg">
   </a>
   <a href="https://www.npmjs.com/package/serverless-s3-security-helper">
     <img alt="npm latest version" src="https://img.shields.io/npm/v/serverless-s3-security-helper/latest.svg">
   </a>
-  <a href="https://codeclimate.com/github/theclouddeck/serverless-s3-security-helper/maintainability">
+  <a href="https://codeclimate.com/github/stratiformdigital/serverless-s3-security-helper/maintainability">
     <img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/20f59ef91bd30565c424/maintainability">
   </a>
   <a href="https://github.com/semantic-release/semantic-release">
