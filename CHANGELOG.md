@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.1.0...v3.2.0) (2022-07-14)
+
+
+### Features
+
+* **publish:**  Publish ([7a0db86](https://github.com/stratiformdigital/serverless-s3-security-helper/commit/7a0db86b07b0b5ad9a926686ebb81acb01d4083a))
+
 # [3.1.0](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.0.0...v3.1.0) (2022-06-23)
 
 
