@@ -1,0 +1,3 @@
+services:
+  bucket-test:
+    path: services/bucket-test
