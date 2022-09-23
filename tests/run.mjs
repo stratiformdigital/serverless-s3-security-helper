@@ -65,7 +65,7 @@ try {
     // Iterate over each bucket created for this stack.
     let buckets = await getBucketsForStack(region, stacks[i]);
     for (var j = 0; j < buckets.length; j++) {
-      await testBucket(region, buckets[i]);
+      await testBucket(region, buckets[j]);
     }
   }
 } catch (error) {

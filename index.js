@@ -30,6 +30,10 @@ function setPropertyForTypes(types, property, value) {
     this.serverless.service.provider.compiledCloudFormationTemplate;
   Object.keys(template.Resources).forEach(function (key) {
     if (types.includes(template.Resources[key]["Type"])) {
+      template.Resources[key]["Properties"] =
+        template.Resources[key]["Properties"] === undefined
+          ? {}
+          : template.Resources[key]["Properties"];
       template.Resources[key]["Properties"][property] = value;
     }
   });
