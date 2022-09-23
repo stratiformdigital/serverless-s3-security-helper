@@ -53,11 +53,13 @@ async function getBucketsForStack(region, stack) {
 }
 
 try {
-  // await runner.run_command_and_output(
-  //   `deploy services`,
-  //   ["sls", "deploy", "--stage", process.env.STAGE_NAME],
-  //   "tests"
-  // );
+
+  // Deploy
+  await runner.run_command_and_output(
+    `deploy services`,
+    ["sls", "deploy", "--stage", process.env.STAGE_NAME],
+    "tests"
+  );
 
   // Iterate over each stack created for this project and stage, although there should only be one.
   let stacks = await getAllStacksForStage(region, process.env.STAGE_NAME);
@@ -66,23 +68,27 @@ try {
     // Iterate over each bucket created for this stack.
     let buckets = await getBucketsForStack(region, stacks[i]);
     for(var j=0; j<buckets.length; j++){
-
-      console.log(`Testing bucket: ${buckets[j]}`);
+      
       await testBucket(region, buckets[i]);
 
     }
   }
 
 } catch (error) {
+
   throw error;
+
 } finally {
-  // await destroyer.destroy(region, process.env.STAGE_NAME, {
-  //   verify: false,
-  //   wait: true,
-  // });
+
+  // Destroy
+  await destroyer.destroy(region, process.env.STAGE_NAME, {
+    verify: false,
+    wait: true,
+  });
 }
 
 async function testBucket(region, bucket){
+  console.log(`Testing bucket: ${bucket}`);
   const client = new S3Client({ region: region });
   // ------------------------------------------------
   try {
