@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.2.0...v3.2.1) (2022-09-23)
+
+
+### Bug Fixes
+
+* **tests and bug:**  Add testing to the project ([#13](https://github.com/stratiformdigital/serverless-s3-security-helper/issues/13)) ([b055b7c](https://github.com/stratiformdigital/serverless-s3-security-helper/commit/b055b7cf1e68bace576a42b2c243968ffa93d456))
+
 # [3.2.0](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.1.0...v3.2.0) (2022-07-14)
 
 
