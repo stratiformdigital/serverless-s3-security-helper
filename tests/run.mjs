@@ -5,10 +5,7 @@ import {
   paginateDescribeStacks,
   paginateListStackResources,
 } from "@aws-sdk/client-cloudformation";
-import {
-  S3Client,
-  GetBucketVersioningCommand,
-} from "@aws-sdk/client-s3";
+import { S3Client, GetBucketVersioningCommand } from "@aws-sdk/client-s3";
 import _ from "lodash";
 const runner = new LabeledProcessRunner();
 const destroyer = new ServerlessStageDestroyer();
@@ -31,7 +28,9 @@ async function getAllStacksForRegion(region) {
 async function getAllStacksForStage(region, stage) {
   return (await getAllStacksForRegion(region))
     .filter((i) => i.Tags?.find((j) => j.Key == "STAGE" && j.Value == stage))
-    .filter((i) => i.Tags?.find((j) => j.Key == "PROJECT" && j.Value == project))
+    .filter((i) =>
+      i.Tags?.find((j) => j.Key == "PROJECT" && j.Value == project)
+    )
     .map((z) => z.StackName);
 }
 
@@ -53,7 +52,6 @@ async function getBucketsForStack(region, stack) {
 }
 
 try {
-
   // Deploy
   await runner.run_command_and_output(
     `deploy services`,
@@ -63,23 +61,16 @@ try {
 
   // Iterate over each stack created for this project and stage, although there should only be one.
   let stacks = await getAllStacksForStage(region, process.env.STAGE_NAME);
-  for(var i=0; i<stacks.length; i++) {
-    
+  for (var i = 0; i < stacks.length; i++) {
     // Iterate over each bucket created for this stack.
     let buckets = await getBucketsForStack(region, stacks[i]);
-    for(var j=0; j<buckets.length; j++){
-      
+    for (var j = 0; j < buckets.length; j++) {
       await testBucket(region, buckets[i]);
-
     }
   }
-
 } catch (error) {
-
   throw error;
-
 } finally {
-
   // Destroy
   await destroyer.destroy(region, process.env.STAGE_NAME, {
     verify: false,
@@ -87,22 +78,24 @@ try {
   });
 }
 
-async function testBucket(region, bucket){
+async function testBucket(region, bucket) {
   console.log(`Testing bucket: ${bucket}`);
   const client = new S3Client({ region: region });
   // ------------------------------------------------
   try {
-    var response = await client.send((new GetBucketVersioningCommand({
-      Bucket: bucket
-    })));
-    if(response.Status == "Enabled") {
-      console.log("PASSED - Bucket versioning enabled.")
+    var response = await client.send(
+      new GetBucketVersioningCommand({
+        Bucket: bucket,
+      })
+    );
+    if (response.Status == "Enabled") {
+      console.log("PASSED - Bucket versioning enabled.");
     } else {
-      throw("PASSED - Bucket versioning enabled.")
+      throw "PASSED - Bucket versioning enabled.";
     }
-  } catch(error) {
-    console.log(`FAILED - Bucket versioning enabled.`)
-    throw(error);
+  } catch (error) {
+    console.log(`FAILED - Bucket versioning enabled.`);
+    throw error;
   }
   // ------------------------------------------------
 }
