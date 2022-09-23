@@ -1,0 +1,21 @@
+service: ${self:custom.PROJECT}-bucket-test
+
+frameworkVersion: "3"
+
+plugins:
+  - "../../../"
+
+provider:
+  name: aws
+  region: ${env:REGION_A}
+  stackTags:
+    PROJECT: ${self:custom.PROJECT}
+    SERVICE: ${self:service}
+
+custom:
+  PROJECT: ${env:PROJECT}
+
+resources:
+  Resources:
+    AppBucket:
+      Type: AWS::S3::Bucket
