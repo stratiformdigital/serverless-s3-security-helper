@@ -83,18 +83,19 @@ async function testBucket(region, bucket) {
   const client = new S3Client({ region: region });
   // ------------------------------------------------
   try {
+    var testName = "Bucket versioning enabled";
     var response = await client.send(
       new GetBucketVersioningCommand({
         Bucket: bucket,
       })
     );
     if (response.Status == "Enabled") {
-      console.log("PASSED - Bucket versioning enabled.");
+      console.log(`PASSED - ${testName}`);
     } else {
-      throw "PASSED - Bucket versioning enabled.";
+      console.log();
+      throw `FAILED - ${testName}`;
     }
   } catch (error) {
-    console.log(`FAILED - Bucket versioning enabled.`);
     throw error;
   }
   // ------------------------------------------------
