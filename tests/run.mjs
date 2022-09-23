@@ -5,6 +5,10 @@ import {
   paginateDescribeStacks,
   paginateListStackResources,
 } from "@aws-sdk/client-cloudformation";
+import {
+  S3Client,
+  GetBucketVersioningCommand,
+} from "@aws-sdk/client-s3";
 import _ from "lodash";
 const runner = new LabeledProcessRunner();
 const destroyer = new ServerlessStageDestroyer();
@@ -65,7 +69,7 @@ try {
 
       console.log(`Testing bucket: ${buckets[j]}`);
       await testBucket(region, buckets[i]);
-      
+
     }
   }
 
@@ -79,21 +83,20 @@ try {
 }
 
 async function testBucket(region, bucket){
-  console.log(region + bucket);
+  const client = new S3Client({ region: region });
+  // ------------------------------------------------
+  try {
+    var response = await client.send((new GetBucketVersioningCommand({
+      Bucket: bucket
+    })));
+    if(response.Status == "Enabled") {
+      console.log("PASSED - Bucket versioning enabled.")
+    } else {
+      throw("PASSED - Bucket versioning enabled.")
+    }
+  } catch(error) {
+    console.log(`FAILED - Bucket versioning enabled.`)
+    throw(error);
+  }
+  // ------------------------------------------------
 }
-
-
-// // ------------------------------------------------
-// console.log("\n\nChecking prod safeguard...");
-// for (let stage of ["prod", "production", "fooprodbar"]) {
-//   try {
-//     await destroyer.destroy(region, stage, {});
-//   } catch (err) {
-//     if (!err.includes("You've requested a destroy for a protected stage")) {
-//       throw "ERROR:  Production safeguard did not work as intended.";
-//     }
-//   }
-// }
-// console.log("Check passed...");
-// // ------------------------------------------------
-
