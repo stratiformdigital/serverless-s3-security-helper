@@ -9,8 +9,7 @@ class ServerlessPlugin {
 
     this.hooks = {
       // This will ensure a properly configured serverless deployment bucket.
-      "aws:deploy:deploy:createStack":
-        this.configureBuckets.bind(this),
+      "aws:deploy:deploy:createStack": this.configureBuckets.bind(this),
 
       // This will ensure proper configuration for all buckets.
       "before:deploy:deploy": this.configureBuckets.bind(this),
@@ -18,7 +17,6 @@ class ServerlessPlugin {
   }
 
   configureBuckets() {
-
     // Enable versioning.
     setPropertyForTypes.call(this, type, "VersioningConfiguration", {
       Status: "Enabled",
@@ -31,7 +29,6 @@ class ServerlessPlugin {
       IgnorePublicAcls: true,
       RestrictPublicBuckets: true,
     });
-
   }
 }
 
