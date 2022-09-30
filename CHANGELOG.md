@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.2.1...v3.3.0) (2022-09-30)
+
+
+### Features
+
+* **block public:** Block all Public Access to buckets ([#20](https://github.com/stratiformdigital/serverless-s3-security-helper/issues/20)) ([6e20127](https://github.com/stratiformdigital/serverless-s3-security-helper/commit/6e20127b778fc6367a4efdd473d6b6dc326a3fb4))
+
 ## [3.2.1](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.2.0...v3.2.1) (2022-09-23)
 
 
