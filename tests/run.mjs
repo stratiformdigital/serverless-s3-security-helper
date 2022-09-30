@@ -5,7 +5,11 @@ import {
   paginateDescribeStacks,
   paginateListStackResources,
 } from "@aws-sdk/client-cloudformation";
-import { S3Client, GetBucketVersioningCommand } from "@aws-sdk/client-s3";
+import {
+  S3Client,
+  GetBucketVersioningCommand,
+  GetPublicAccessBlockCommand,
+} from "@aws-sdk/client-s3";
 import _ from "lodash";
 const runner = new LabeledProcessRunner();
 const destroyer = new ServerlessStageDestroyer();
@@ -65,7 +69,35 @@ async function testBucket(region, bucket) {
     if (response.Status == "Enabled") {
       console.log(`PASSED - ${testName}`);
     } else {
-      console.log();
+      throw `FAILED - ${testName}`;
+    }
+  } catch (error) {
+    throw error;
+  }
+  // ------------------------------------------------
+
+  // ------------------------------------------------
+  try {
+    var testName = "Bucket public access blocked";
+    var response = await client.send(
+      new GetPublicAccessBlockCommand({
+        Bucket: bucket,
+      })
+    );
+    const expectedPublicAccessBlockConfiguration = {
+      BlockPublicAcls: true,
+      IgnorePublicAcls: true,
+      BlockPublicPolicy: true,
+      RestrictPublicBuckets: true,
+    };
+    if (
+      _.isEqual(
+        response.PublicAccessBlockConfiguration,
+        expectedPublicAccessBlockConfiguration
+      )
+    ) {
+      console.log(`PASSED - ${testName}`);
+    } else {
       throw `FAILED - ${testName}`;
     }
   } catch (error) {
