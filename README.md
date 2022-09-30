@@ -44,8 +44,10 @@ Currently, the plugin:
 
 This plugin has two hooks:
 
-- package:createDeploymentArtifacts: This hook sets versioning on the sls deployment bucket.
-- package:compileEvents: This hook sets versioning on all other buckets.
+- package:createDeploymentArtifacts
+- package:compileEvents
+
+At each step, the buckets are set to be configured properly. This ensures the serverless deployment bucket is configured properly throughout its entire lifecycle.
 
 ## License
 
