@@ -1,10 +1,6 @@
 "use strict";
 
 const type = ["AWS::S3::Bucket"];
-const property = "VersioningConfiguration";
-const versioningConfiguration = {
-  Status: "Enabled",
-};
 
 class ServerlessPlugin {
   constructor(serverless, options) {
@@ -12,16 +8,30 @@ class ServerlessPlugin {
     this.options = options;
 
     this.hooks = {
-      // This will ensure versioning is enabled for the serverless deployment bucket.
+      // This will ensure a properly configured serverless deployment bucket.
       "aws:deploy:deploy:createStack":
-        this.enableVersioningForBuckets.bind(this),
+        this.configureBuckets.bind(this),
 
-      // This will ensure versioning is enabled for all buckets.
-      "before:deploy:deploy": this.enableVersioningForBuckets.bind(this),
+      // This will ensure proper configuration for all buckets.
+      "before:deploy:deploy": this.configureBuckets.bind(this),
     };
   }
-  enableVersioningForBuckets() {
-    setPropertyForTypes.call(this, type, property, versioningConfiguration);
+
+  configureBuckets() {
+
+    // Enable versioning.
+    setPropertyForTypes.call(this, type, "VersioningConfiguration", {
+      Status: "Enabled",
+    });
+
+    // Block all public access to the bucket.
+    setPropertyForTypes.call(this, type, "PublicAccessBlockConfiguration", {
+      BlockPublicAcls: true,
+      BlockPublicPolicy: true,
+      IgnorePublicAcls: true,
+      RestrictPublicBuckets: true,
+    });
+
   }
 }
 
