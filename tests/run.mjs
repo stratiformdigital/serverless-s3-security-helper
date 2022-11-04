@@ -7,6 +7,7 @@ import {
 } from "@aws-sdk/client-cloudformation";
 import {
   S3Client,
+  GetBucketPolicyCommand,
   GetBucketVersioningCommand,
   GetPublicAccessBlockCommand,
 } from "@aws-sdk/client-s3";
@@ -55,55 +56,91 @@ async function getBucketsForStack(region, stack) {
   return buckets;
 }
 
-async function testBucket(region, bucket) {
-  console.log(`Testing bucket: ${bucket}`);
+async function testSslIsEnforced(region, buckets) {
   const client = new S3Client({ region: region });
-  // ------------------------------------------------
-  try {
-    var testName = "Bucket versioning enabled";
-    var response = await client.send(
-      new GetBucketVersioningCommand({
-        Bucket: bucket,
-      })
-    );
-    if (response.Status == "Enabled") {
-      console.log(`PASSED - ${testName}`);
-    } else {
-      throw `FAILED - ${testName}`;
+  var testName = "Bucket SSL enforced";
+  for (const bucket of buckets) {
+    try {
+      var testName = "Bucket SSL enforced";
+      var response = await client.send(
+        new GetBucketPolicyCommand({
+          Bucket: bucket,
+        })
+      );
+      const sslIsEnforced = _.map(
+        JSON.parse(response.Policy).Statement,
+        (statement) => {
+          return _.isEqual(_.omit(statement, "Sid"), {
+            Effect: "Deny",
+            Principal: "*",
+            Action: "s3:*",
+            Resource: [`arn:aws:s3:::${bucket}/*`, `arn:aws:s3:::${bucket}`],
+            Condition: { Bool: { "aws:SecureTransport": "false" } },
+          });
+        }
+      ).includes(true);
+      if (sslIsEnforced) {
+        console.log(`PASSED - ${testName} - ${bucket}`);
+      } else {
+        throw `FAILED - ${testName} - ${bucket}`;
+      }
+    } catch (error) {
+      throw error;
     }
-  } catch (error) {
-    throw error;
   }
-  // ------------------------------------------------
+}
 
-  // ------------------------------------------------
-  try {
-    var testName = "Bucket public access blocked";
-    var response = await client.send(
-      new GetPublicAccessBlockCommand({
-        Bucket: bucket,
-      })
-    );
-    const expectedPublicAccessBlockConfiguration = {
-      BlockPublicAcls: true,
-      IgnorePublicAcls: true,
-      BlockPublicPolicy: true,
-      RestrictPublicBuckets: true,
-    };
-    if (
-      _.isEqual(
-        response.PublicAccessBlockConfiguration,
-        expectedPublicAccessBlockConfiguration
-      )
-    ) {
-      console.log(`PASSED - ${testName}`);
-    } else {
-      throw `FAILED - ${testName}`;
+async function testBucketVersioning(region, buckets) {
+  const client = new S3Client({ region: region });
+  var testName = "Bucket versioning enabled";
+  for (const bucket of buckets) {
+    try {
+      var response = await client.send(
+        new GetBucketVersioningCommand({
+          Bucket: bucket,
+        })
+      );
+      if (response.Status == "Enabled") {
+        console.log(`PASSED - ${testName} - ${bucket}`);
+      } else {
+        throw `FAILED - ${testName} - ${bucket}`;
+      }
+    } catch (error) {
+      throw error;
     }
-  } catch (error) {
-    throw error;
   }
-  // ------------------------------------------------
+}
+
+async function testBucketAccess(region, buckets) {
+  const client = new S3Client({ region: region });
+  var testName = "Bucket public access blocked";
+  for (const bucket of buckets) {
+    try {
+      var response = await client.send(
+        new GetPublicAccessBlockCommand({
+          Bucket: bucket,
+        })
+      );
+      const expectedPublicAccessBlockConfiguration = {
+        BlockPublicAcls: true,
+        IgnorePublicAcls: true,
+        BlockPublicPolicy: true,
+        RestrictPublicBuckets: true,
+      };
+      if (
+        _.isEqual(
+          response.PublicAccessBlockConfiguration,
+          expectedPublicAccessBlockConfiguration
+        )
+      ) {
+        console.log(`PASSED - ${testName} - ${bucket}`);
+      } else {
+        throw `FAILED - ${testName} - ${bucket}`;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 try {
@@ -119,16 +156,16 @@ try {
   for (const stack of stacks) {
     // Iterate over each bucket created for this stack.
     let buckets = await getBucketsForStack(region, stack);
-    for (const bucket of buckets) {
-      await testBucket(region, bucket);
-    }
+    await testBucketVersioning(region, buckets);
+    await testBucketAccess(region, buckets);
+    await testSslIsEnforced(region, buckets);
   }
 } catch (error) {
   throw error;
 } finally {
   // Destroy
-  await destroyer.destroy(region, process.env.STAGE_NAME, {
-    verify: false,
-    wait: true,
-  });
+  // await destroyer.destroy(region, process.env.STAGE_NAME, {
+  //   verify: false,
+  //   wait: true,
+  // });
 }

@@ -51,5 +51,8 @@
   "author": {
     "name": "Mike Dial",
     "url": "https://github.com/mdial89f"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
