@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.3.0...v4.0.0) (2022-11-04)
+
+
+### Features
+
+* **require ssl:** Add 'require ssl' functionality to the plugin ([#31](https://github.com/stratiformdigital/serverless-s3-security-helper/issues/31)) ([28222e3](https://github.com/stratiformdigital/serverless-s3-security-helper/commit/28222e38e29c9dbe03e3b9fe48276c31e2fbb4b5))
+
+
+### BREAKING CHANGES
+
+* **require ssl:** Buckets with custom bucket policies need to be careful when upgrading to this version, as the 'require ssl' functionality will overwrite the custom policy unless that bucket is set to be 'skipped' by way of plugin configuration variables.  See docs!
+
 # [3.3.0](https://github.com/stratiformdigital/serverless-s3-security-helper/compare/v3.2.1...v3.3.0) (2022-09-30)
 
 
