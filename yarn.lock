@@ -2238,9 +2238,9 @@
     tslib "^2.5.0"
 
 "@stratiformdigital/serverless-stage-destroyer@^2.0.1":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@stratiformdigital/serverless-stage-destroyer/-/serverless-stage-destroyer-2.1.0.tgz#7fd519f451bd3e319ae00232f52df34d0ef089c9"
-  integrity sha512-YCvPWl7kxuYRqMRk6Ub0I+zorWdlcN/x5RG7oajquOUx2SVkgqMlK+MDeNjyhvh5JVHEWJuPXxh4k8Z9iJD3ug==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@stratiformdigital/serverless-stage-destroyer/-/serverless-stage-destroyer-2.1.1.tgz#6c0a5bde84d8e0646aa4ddf9ea0b0b9b099495fb"
+  integrity sha512-2rotApZgNH3SDNvig5voZ8f0NDDWYLd/Z3yIMDpHh4dQOPR92zXh8eBou4Cio/vgTAtxVLsOL/EPViQWkPXcTg==
   dependencies:
     "@aws-sdk/client-cloudformation" "^3.128.0"
     "@aws-sdk/client-s3" "^3.128.0"
